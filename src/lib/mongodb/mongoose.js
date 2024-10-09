@@ -12,7 +12,7 @@ export const connect = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "KALRO-Auth-App",
+      dbName: "kalro-auth-app",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
