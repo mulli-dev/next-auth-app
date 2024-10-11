@@ -1,19 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
-    <header className="bg-gradient-to-r from-blue-300 to-purple-400 shadow-lg">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-3">
+    //<header className="shadow-lg bg-gradient-to-r from-blue-300 to-purple-400">
+    <header className="shadow-lg bg-gradient-to-r from-white to-white">
+      <div className="flex items-center justify-between max-w-6xl p-3 mx-auto">
         {/* logo */}
-        <Link href="/" className="text-2xl font-extrabold group cursor-pointer">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700 drop-shadow-md group-hover:from-blue-400 group-hover:to-blue-600">
-            Auth
-          </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-700 drop-shadow-md group-hover:from-purple-400 group-hover:to-purple-600">
-            App
-          </span>
+
+        <Link href="/" className="text-2xl font-extrabold cursor-pointer group">
+          <img
+            src="https://i0.wp.com/worldfair-project.eu/wp-content/uploads/2022/10/kalro-logo.webp?fit=598%2C422&ssl=1"
+            alt="KALRO Logo"
+            className="w-auto h-10 drop-shadow-md group-hover:opacity-80"
+          />
         </Link>
+
         {/* add a navigation menu */}
         <nav>
           <ul className="flex gap-4">
