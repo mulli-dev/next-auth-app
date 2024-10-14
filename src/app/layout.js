@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { ClerkProvider, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
+import footer from "@/components/Footer";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Next auth App",
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
             <Header />
             {children}
           </ClerkLoaded>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

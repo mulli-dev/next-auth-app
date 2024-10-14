@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   // State management for dropdowns
@@ -14,31 +14,38 @@ export default function Home() {
 
   const slides = [
     {
-      image:
-        "https://media.istockphoto.com/id/1284394529/photo/ripe-milo-grain-heads-park-county-indiana.jpg?s=612x612&w=0&k=20&c=pchDlSvCfukbCfi_NW6mnLMJoaBwX1RTjdyJKlKn7A4=",
-      title: "Research on Sorghum Varieties",
-      description:
-        "Sorghum is a drought-tolerant crop, grown in drier areas. Our research focuses on increasing yield, drought tolerance, and more.",
+      backgroundImage:
+        "url(' https://t3.ftcdn.net/jpg/02/56/92/58/360_F_256925881_PX62yR6uaLCqVXYbQQAVGbsmtXp16t2M.jpg')",
+
+      title: "Research on Livestock",
+      content:
+        "KALRO addresses constraints in the livestock sub-sector through the development of technologies that improve feed availability throughout the year.",
     },
     {
-      image:
-        "https://www.shutterstock.com/image-photo/black-white-holstein-friesian-cattle-600nw-1939367587.jpg",
-      title: "Research on Livestock",
-      description:
-        "KALRO addresses constraints in the livestock sub-sector through the development of technologies that improve feed availability throughout the year.",
+      backgroundImage:
+        "url(' https://media.istockphoto.com/id/1284394529/photo/ripe-milo-grain-heads-park-county-indiana.jpg?s=612x612&w=0&k=20&c=pchDlSvCfukbCfi_NW6mnLMJoaBwX1RTjdyJKlKn7A4=')",
+
+      title: "Research on Sorghum Varieties",
+      content:
+        "Sorghum is a drought tolerant crop hence it's grown in the drier areas. Our research objectives in sorghum research are: Increased yield, drought, disease and pest tolerance, earliness, seed colour and marketability.",
     },
   ];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   // Function to go to the next slide
   const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
   // Function to go to the previous slide
   const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
-    );
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
   const resources = [
@@ -259,35 +266,57 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative h-96">
-        {/* Display current slide */}
-        <img
-          src={slides[currentSlide].image}
-          alt={slides[currentSlide].title}
-          className="object-cover w-full h-full"
-        />
+      <div
+        className="relative h-screen  overflow-hidden"
+        style={{ height: "75vh" }}
+      >
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+              currentSlide === index ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backgroundImage: slide.backgroundImage }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-8">
+              <div className="bg-black bg-opacity-50 p-6 sm:p-8 max-w-3xl text-white">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                  {slide.title}
+                </h1>
+                <p className="text-lg sm:text-xl">{slide.content}</p>
+                <button className="mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                  Click Here
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
 
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white">
-          <h1 className="text-3xl font-bold">{slides[currentSlide].title}</h1>
-          <p className="mt-4">{slides[currentSlide].description}</p>
-          <button className="mt-6 px-6 py-2 bg-green-600 rounded-full text-white hover:bg-green-800">
-            Click Here
-          </button>
-        </div>
-
-        {/* Navigation Buttons */}
         <button
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-2 rounded-full hover:bg-green-800"
-          onClick={prevSlide}
-        >
-          ❮
-        </button>
-        <button
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-2 rounded-full hover:bg-green-800"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-4 bg-gray-800 bg-opacity-50 hover:bg-green-800 focus:outline-none text-white text-2xl transition-colors duration-100 rounded-full"
           onClick={nextSlide}
         >
-          ❯
+          &#8250;
         </button>
+
+        <button
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-4 m-2 bg-gray-800 bg-opacity-60 hover:bg-green-800 focus:outline-none text-white text-2xl transition-colors duration-100 rounded-full"
+          onClick={prevSlide}
+        >
+          &#8249;
+        </button>
+
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          {slides.map((_, index) => (
+            <span
+              key={index}
+              className={`inline-block w-3 h-3 rounded-full mx-1 ${
+                currentSlide === index ? "bg-white" : "bg-white bg-opacity-50"
+              }`}
+            ></span>
+          ))}
+        </div>
       </div>
 
       {/* Page Content */}
