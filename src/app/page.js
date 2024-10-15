@@ -89,7 +89,7 @@ export default function Home() {
   return (
     <div>
       {/* Navigation Bar */}
-      <nav className="bg-green-600 z-10">
+      <nav className="bg-green-600 z-10 font-carlito">
         <ul className="flex justify-center gap-6 py-2 font-semibold text-white">
           <li>
             <Link href="/">Home</Link>

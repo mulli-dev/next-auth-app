@@ -1,23 +1,28 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { ClerkProvider, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
-import footer from "@/components/Footer";
+import { Carlito } from "next/font/google";
 import Footer from "@/components/Footer";
+
+// Initialize Carlito font
+const carlito_init = Carlito({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-carlito",
+});
 
 export const metadata = {
   title: "Next auth App",
-  description: " Next auth with clerk and mongodb",
+  description: "Next auth with clerk and mongodb",
 };
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        {/* Apply the Carlito font class to the body */}
+        <body className={carlito_init.variable}>
           <ClerkLoading>
             <Loader />
           </ClerkLoading>
