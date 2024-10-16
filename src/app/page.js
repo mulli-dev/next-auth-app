@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -90,6 +90,15 @@ export default function Home() {
     <div>
       {/* Navigation Bar */}
       <nav className="bg-green-600 z-10 font-carlito">
+        {/* Mobile Menu Icon */}
+        <div className="flex justify-between items-center p-4 md:hidden">
+          <h1 className="text-white text-lg font-bold">KALRO</h1>
+          <button onClick={toggleMobileMenu} className="text-white text-2xl">
+            {isMobileMenuOpen ? <RiCloseLine /> : <RiMenu3Line />}
+          </button>
+        </div>
+        {/* Links for larger screens */}
+
         <ul className="flex justify-center gap-6 py-2 font-semibold text-white">
           <li>
             <Link href="/">Home</Link>
@@ -267,8 +276,10 @@ export default function Home() {
 
       {/* Hero Section */}
       <div
-        className="relative h-screen  overflow-hidden"
-        style={{ height: "75vh" }}
+        // className="relative h-screen  overflow-hidden"
+
+        //style={{ height: "75vh" }}
+        className="relative overflow-hidden h-screen sm:h-96 lg:h-[75vh]"
       >
         {slides.map((slide, index) => (
           <div

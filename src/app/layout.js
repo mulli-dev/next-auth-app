@@ -21,6 +21,13 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          {/* Meta tag for mobile responsiveness */}
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+          />
+        </head>
         {/* Apply the Carlito font class to the body */}
         <body className={carlito_init.variable}>
           <ClerkLoading>
@@ -28,7 +35,7 @@ export default function RootLayout({ children }) {
           </ClerkLoading>
           <ClerkLoaded>
             <Header />
-            {children}
+            <main>{children}</main>
           </ClerkLoaded>
           <Footer />
         </body>

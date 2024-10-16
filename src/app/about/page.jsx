@@ -28,7 +28,7 @@ export default function About() {
           <ul className="mb-4 space-y-2 text-gray-700">
             <li>
               <a
-                href="https://github.com/sahandghavidel/next-auth-app"
+                href="https://github.com/mulli-dev/next-auth-app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-blue-500 hover:underline"
