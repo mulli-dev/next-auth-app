@@ -7,6 +7,22 @@ export default function Home() {
   // State management for dropdowns
   const [openDropdown, setOpenDropdown] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".dropdown-container")) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const toggleDropdown = (dropdown) => {
     // If the clicked dropdown is already open, close it, otherwise open it and close others
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
