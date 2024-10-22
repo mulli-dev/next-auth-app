@@ -1,9 +1,12 @@
 import "./globals.css";
-import Header from "@/components/Header";
+import dynamic from "next/dynamic";
 import { ClerkProvider, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
-import Loader from "@/components/Loader";
 import { Carlito } from "next/font/google";
-import Footer from "@/components/Footer";
+
+// Lazy load Header and Footer components to reduce the initial bundle size
+const Header = dynamic(() => import("@/components/Header"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+const Loader = dynamic(() => import("@/components/Loader"), { ssr: false });
 
 // Initialize Carlito font
 const carlito_init = Carlito({
@@ -13,8 +16,8 @@ const carlito_init = Carlito({
 });
 
 export const metadata = {
-  title: "Next auth App",
-  description: "Next auth with clerk and mongodb",
+  title: "Next Auth App",
+  description: "Next auth with Clerk and MongoDB",
 };
 
 export default function RootLayout({ children }) {
@@ -36,8 +39,8 @@ export default function RootLayout({ children }) {
           <ClerkLoaded>
             <Header />
             <main>{children}</main>
+            <Footer />
           </ClerkLoaded>
-          <Footer />
         </body>
       </html>
     </ClerkProvider>
